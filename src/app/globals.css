@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (toggle adds `.dark` to <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  KHOTA Design System
+  ------------------------------------------------------------------
+  Primary  : Deep Navy   #17344D
+  Surface  : Light Gray  #F5F7FA
+  Accent   : Muted Gold  (used very sparingly)
+*/
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #122233;
+
+  --surface: #f5f7fa;
+  --surface-foreground: #1c3346;
+
+  --card: #ffffff;
+  --card-foreground: #122233;
+
+  --muted: #f5f7fa;
+  --muted-foreground: #5b6b7b;
+
+  --border: #e6ebf1;
+  --input: #e1e7ee;
+  --ring: #17344d;
+
+  --primary: #17344d;
+  --primary-hover: #1f4665;
+  --primary-foreground: #ffffff;
+
+  --accent: #b08d57;
+  --accent-soft: #f2e9da;
+  --accent-foreground: #4d3a1d;
+
+  --radius: 1rem;
+
+  --shadow-soft: 0 1px 2px rgba(18, 34, 51, 0.04),
+    0 8px 24px -12px rgba(18, 34, 51, 0.12);
+  --shadow-card: 0 1px 3px rgba(18, 34, 51, 0.05),
+    0 18px 40px -24px rgba(18, 34, 51, 0.18);
+  --shadow-lift: 0 2px 6px rgba(18, 34, 51, 0.06),
+    0 30px 60px -28px rgba(18, 34, 51, 0.28);
+}
+
+.dark {
+  --background: #0a1622;
+  --foreground: #e8eef4;
+
+  --surface: #0e1d2c;
+  --surface-foreground: #d7e2ec;
+
+  --card: #102233;
+  --card-foreground: #e8eef4;
+
+  --muted: #102233;
+  --muted-foreground: #93a4b5;
+
+  --border: #1d3245;
+  --input: #21384c;
+  --ring: #7fa9cc;
+
+  --primary: #2f648f;
+  --primary-hover: #3a78a8;
+  --primary-foreground: #ffffff;
+
+  --accent: #c7a572;
+  --accent-soft: #2a2114;
+  --accent-foreground: #f0e2cb;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35),
+    0 18px 40px -24px rgba(0, 0, 0, 0.65);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.4),
+    0 30px 60px -28px rgba(0, 0, 0, 0.7);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-manrope);
+  --font-arabic: var(--font-cairo);
+
+  --radius-sm: calc(var(--radius) - 0.5rem);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+
+  --animate-accordion-down: accordion-down 0.3s ease-out;
+  --animate-accordion-up: accordion-up 0.25s ease-out;
+  --animate-marquee: marquee 36s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Arabic typography: never stretch, comfortable line-height */
+  [dir="rtl"] body {
+    font-family: var(--font-arabic), system-ui, sans-serif;
+    line-height: 1.85;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 18%, transparent);
+    color: var(--foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
+  }
+  [dir="rtl"] .font-heading {
+    font-family: var(--font-arabic), system-ui, sans-serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Subtle dotted backdrop used behind hero */
+  .bg-grid {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in oklab, var(--primary) 9%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 28px 28px;
+  }
+
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
 }
