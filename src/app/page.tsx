@@ -22,12 +22,12 @@ export default function Home() {
       <main>
         <Hero />
         <Trust />
+        <Pricing />
         <Services />
         <Why />
         <Process />
         <BeforeAfter />
         <Testimonials reviews={reviews} />
-        <Pricing />
         <Faq />
         <FinalCta />
       </main>

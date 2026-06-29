@@ -14,11 +14,11 @@ import { siteConfig, whatsappUrl } from "@/lib/site";
 function useNavLinks() {
   const { t } = useLanguage();
   return [
+    { href: "#pricing", label: t.nav.packages },
     { href: "#services", label: t.nav.services },
     { href: "#why", label: t.nav.why },
     { href: "#process", label: t.nav.process },
     { href: "#testimonials", label: t.nav.testimonials },
-    { href: "#pricing", label: t.nav.packages },
     { href: "#faq", label: t.nav.faq },
   ];
 }
