@@ -18,6 +18,7 @@ function useNavLinks() {
     { href: "#why", label: t.nav.why },
     { href: "#process", label: t.nav.process },
     { href: "#testimonials", label: t.nav.testimonials },
+    { href: "#pricing", label: t.nav.packages },
     { href: "#faq", label: t.nav.faq },
   ];
 }

@@ -24,6 +24,7 @@ export function Footer() {
   const companyLinks = [
     { label: f.company.why, href: "#why" },
     { label: f.company.process, href: "#process" },
+    { label: t.nav.packages, href: "#pricing" },
     { label: f.company.testimonials, href: "#testimonials" },
     { label: f.company.faq, href: "#faq" },
   ];
